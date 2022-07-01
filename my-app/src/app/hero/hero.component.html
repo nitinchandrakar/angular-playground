@@ -1,0 +1,76 @@
+<!--
+  <ng-content select="img"></ng-content>
+   <ng-content select=".class-Name"></ng-content>
+-->
+<ng-content></ng-content>
+<h2 [ngStyle]="{ 'text-decoration': 'none' }">My Heroes</h2>
+<ul class="heroes">
+  <li
+    *ngFor="
+      let hero of heroes;
+      index as index;
+      first as isFirst;
+      last as isLast;
+      even as isEven;
+      odd as isOdd
+    "
+  >
+    <button
+      [class.selected]="hero === selectedHero"
+      [ngClass]="{ selected: hero === selectedHero }"
+      type="button"
+      (click)="onSelect(hero)"
+    >
+      <span class="badge">{{ hero.id }}</span>
+      <span class="name">{{ hero.name }}</span>
+    </button>
+  </li>
+</ul>
+
+<div *ngIf="selectedHero; else noSlection">
+  <h2>{{ selectedHero.name | uppercase }} Details</h2>
+  <div>id: {{ selectedHero.id }}</div>
+  <ng-container *ngSwitch="selectedHero.name">
+    <div *ngSwitchCase="'Dr. Nice'">
+      <label for="hero-name">Hero name: </label>
+      <input
+        id="hero-name"
+        [(ngModel)]="selectedHero.name"
+        placeholder="name"
+      />
+    </div>
+
+    <div *ngSwitchDefault>
+      <label for="hero-name">Hero name: </label>
+      <input
+        id="hero-name"
+        [(ngModel)]="selectedHero.name"
+        placeholder="name"
+      />
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #noSlection>
+  <div>Not selected</div>
+</ng-template>
+
+
+
+<!-- 
+  Template projection
+
+<ng-template #tempRef let-variable>
+  <div>{{variable.key}}</div>
+</ng-template>
+
+<div *ngTemplateOutlet="tempRef; context={data:data}"></div>
+-->
+
+
+<!--
+  Pipes
+  string | uppercase
+  number | currency
+  object | keyvalue
+-->
