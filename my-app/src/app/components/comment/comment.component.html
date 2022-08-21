@@ -1,5 +1,6 @@
 <div class="comment-container">
-  <input type="text" [(ngModel)]="comment.text" />
+  <p>{{ comment.text }}</p>
+  <input type="text" [(ngModel)]="inputText" />
   <button (click)="handleReply($event)">Reply</button>
 </div>
 <div class="reply-container" *ngIf="comment.reply">
